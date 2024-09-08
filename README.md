@@ -1,5 +1,7 @@
 # Classification de mes photos
 
+> 41.2924°S / 174.7787° E
+
 Voici ma serie d'algorithme afin de classer mes photos par lieux
 
 ## Contexte 
@@ -153,7 +155,45 @@ Je lui donne en paramètre les coordonnées du centre d'un de mes clusters et il
 "Hobbiton Movie Set, Lakeside, Matamata Piako District, Waikato, New Zealand / Aotearoa"
 ```
 
-C'est pas mal mais il y a quand meme d 
+C'est pas mal mais il y a quand meme du traval manuel derrière car je veux que les noms des endroits soit clair et simple. Pour `Hobbiton`, je veux juste le nom `Hobbiton` et pas `Hobbiton Movie Set`.
+Ce n'est peut être l'exemple le plus parlant.
+
+En voici un autre.
+
+``` 
+"3637, Cape Palliser Road, Martinborough Community, South Wairarapa District, Wellington, New Zealand / Aotearoa"
+```
+
+C'est un endroit que l'on appelle "Cape Pallisier". Une magnifique randonnée le long de la côte de la region de Wellington. Mais elle se fait sur une route. La "Cape Palliser road" donc `nominatim` m'a trouvé ce lieu.
+
+Si je reprends ma classification de mes photos de voyage. Voici comment je l'aurais fait à la main : `Océanie/Nouvelle_Zélande/Wellington/Cape_Palissier`
+
+On voit bien que j'ai toutes les informations pour le faire (mis à part le contient, mais ce n'est pas un problème pour le moment), il faut juste le remettre en forme et garder les bonnes informations.
+
+Honnetement, je ne vois pas comment un script pourrais faire ça. Peut être avec un peu d'intelligence artificielle entrainner sur le nom de mes dossiers déjà existant ? Pour l'instant, je veux gardr ma methode simple.
+
+Je vais le faire à la main mais en me basant sur les informations que je posséde.
+
+J'enregistre cette information dans mon fichier `json`
+
+#### Affinage des noms des places
+
+La première idée que j'ai eu pour affiner le nom des places était de renommer tout les dossiers des clusters par le noms trouver par l'API de recherche (`nominatim`), associé un cluster à un `UUID`, enregistré cette `UUID` dans un fichier dans le dossier du cluster, modifier le nom du dossier à la main.
+Bref, une belle machine à gaz.
+
+Finalement, en ecrivant le paragrahe ligne et si je me concentre sur mon besoin pour classer mon cluster, j'ai besoin d'avoir :
+* Le nom du contient
+* Le nom du pays
+* Le nom de la ville region
+* Le nom de l'endroit
+* Un champs de données libre pour une descrption ou une autre informations.
+
+J'ai pratiquement toutes les infos dont j'ai besoin. Il me manque le nom du contient mais encore une fois ce n'est pas vraiment un problème, l'information est très simple à trouver.
+
+Je vais utiliser la bonne vielle méthode d'une entrée sur le termianl. Ca m'empèche d'avoir un traitement totalement automatisé. Mais j'ai conçut les algorithme pour être utilisé de manière indépedante. Donc cette partie là pourra être fait dans un seconds temps. Et puis si le nom sorti par `nominatim` n'est pas très bon, je peux aller consulter par moi même la photo.
+
+
+
 
 ## TODO
 
