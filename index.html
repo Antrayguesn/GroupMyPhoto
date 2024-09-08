@@ -1,0 +1,150 @@
+<!doctype html>
+<html class="no-js" lang="fr">
+
+<head>
+  <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
+  <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Aigyre Consult">
+  <meta name="robots" content="index, follow">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="GroupMyPhoto">
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org/",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Form",
+          "item": ""
+        }
+      ]
+    }
+  </script>
+  <meta property="og:description" content="">
+  <title>Formulaire de classification de photos</title>
+</head>
+
+<body class="text-center">
+
+  <input type="file" id="file-input" accept=".json">
+  <div id="form-container"></div>
+
+  <button id="download-btn" class="button" style="display:none;">Télécharger les modifications</button>
+
+  <script>
+    let datapoints = {}; // Variable pour stocker les données JSON
+
+    // Fonction pour générer un formulaire basé sur les données JSON
+    function createForm(data, key) {
+      return `
+        <form id="form-${key}" onsubmit="saveChanges('${key}'); return false;">
+          <h2>Cluster ${key}</h2>
+          <p>${data.display_name}</p>
+          <div class="row medium-up-2">
+            <div class="columns">
+              <label for="contient-${key}"> Contient : </label> <br>
+              <input type="text" id="contient-${key}" name="contient" value="${data.contient || ''}"><br>
+            </div>
+            <div class="columns">
+              <label for="pays-${key}"> Pays : </label> <br>
+              <input type="text" id="pays-${key}" name="pays" value="${data.pays || ''}"><br>
+            </div>
+          </div>
+
+          <div class="row medium-up-2">
+            <div class="columns">
+              <label for="region-${key}"> Region : </label> <br>
+              <input type="text" id="region-${key}" name="region" value="${data.region || ''}"><br>
+            </div>
+            <div class="columns">
+              <label for="place-${key}"> Place : </label> <br>
+              <input type="text" id="place-${key}" name="place" value="${data.place || ''}"><br>
+            </div>
+          </div>
+          <div class="row medium-up-0">
+            <label for="extra-${key}"> Extra : </label> <br>
+            <input type="text" id="extra-${key}" name="extra" value="${data.extra || ''}"><br>
+            <input type="submit" id="submit-${key}" name="submit" value="Enregistrer" class="button"><br>
+          </div>
+        </form><br><br>
+      `;
+    }
+
+    // Fonction pour sauvegarder les modifications
+    function saveChanges(key) {
+      const form = document.getElementById(`form-${key}`);
+      const formData = new FormData(form);
+
+      // Mettre à jour les données JSON en mémoire
+      datapoints[key].contient = formData.get('contient');
+      datapoints[key].pays = formData.get('pays');
+      datapoints[key].region = formData.get('region');
+      datapoints[key].place = formData.get('place');
+      datapoints[key].extra = formData.get('extra');
+
+      alert(`Les modifications du cluster ${key} ont été enregistrées.`);
+
+      // Afficher le bouton de téléchargement après la première modification
+      document.getElementById('download-btn').style.display = 'block';
+    }
+
+    // Fonction pour télécharger le fichier JSON modifié
+    function downloadJSON() {
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(datapoints, null, 2));
+      const downloadAnchorNode = document.createElement('a');
+      downloadAnchorNode.setAttribute("href", dataStr);
+      downloadAnchorNode.setAttribute("download", "datapoints_modifiés.json");
+      document.body.appendChild(downloadAnchorNode); // required for firefox
+      downloadAnchorNode.click();
+      downloadAnchorNode.remove();
+    }
+
+    // Gestionnaire d'événement pour le file picker
+    document.getElementById('file-input').addEventListener('change', function(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          try {
+            datapoints = JSON.parse(e.target.result);
+            const formContainer = document.getElementById('form-container');
+            formContainer.innerHTML = '';  // Réinitialiser le conteneur
+
+            for (const key in datapoints) {
+              if (datapoints.hasOwnProperty(key)) {
+                formContainer.innerHTML += createForm(datapoints[key], key);
+              }
+            }
+          } catch (error) {
+            console.error('Erreur lors du traitement du fichier JSON:', error);
+            alert('Le fichier sélectionné est invalide ou corrompu.');
+          }
+        };
+        reader.readAsText(file);
+      } else {
+        alert('Veuillez sélectionner un fichier.');
+      }
+    });
+
+    // Gestionnaire pour le bouton de téléchargement
+    document.getElementById('download-btn').addEventListener('click', downloadJSON);
+
+  </script>
+
+</body>
+
+<footer>
+  <div class="text-center">
+    <div class="row">
+      <strong>Réalisé par</strong> 
+      <img src="assets/logo-AIGYRE_150.png" alt="Aigyre Consult">
+    </div>
+  </div>
+</footer>
+
+</html>

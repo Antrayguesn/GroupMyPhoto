@@ -1,0 +1,43 @@
+.amk {
+    position: relative;
+    margin-top: 1%;
+    font-family: "Raleway", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    
+}
+
+.amkbg {
+    background-image: url(assets/img/chantier1.jpeg);
+    background-size: cover; /* Assure que le dégradé couvre toute la page */
+    background-position: center;
+    background-attachment: fixed; /* Le dégradé reste fixe lors du défilement */
+    color: white; /* Couleur du texte pour contraste */
+    left: 0;
+    filter: brightness(50%) blur(2px);
+    height: 650px; 
+    width: 100%;
+    z-index: 1; /* Assure que l'image de fond est derrière le contenu */
+    position: absolute;
+    z-index: 1; /* Assure que l'image de fond est derrière le contenu */
+}
+
+.sticky {
+  position: sticky; /* Le dégradé reste fixe lors du défilement */
+}
+
+.content {
+    position: relative;
+    color: white;
+    z-index: 2; /* Assure que le contenu est au-dessus de l'image de fond */
+    padding: 20px; /* Ajustez à vos besoins */
+    height: 650px; 
+  }
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 500,
+  'GRAD' 0,
+  'opsz' 24
+}
