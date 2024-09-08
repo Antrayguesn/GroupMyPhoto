@@ -145,8 +145,15 @@ Pour mon cluster 0, ça donne ça :
 
 Il existe des API qui permette de faire une recherche sur une carte inversée. c'est à dire on rentre des coordonnées et ça nous sort une adresse ou un lieux.
 
-Je pense que l'API de Google Maps reponds parfaitement au besoin. Mais pour mon premier essai j'ai utilise une API d'openstreetmap (https://nominatim.openstreetmap.org/reverse)
+Je pense que l'API de Google Maps reponds parfaitement au besoin. Mais pour mon premier essai j'ai utilise une API d'openstreetmap (https://nominatim.openstreetmap.org/reverse).
 
+Je lui donne en paramètre les coordonnées du centre d'un de mes clusters et il me sort l'adresse ou l'endroit le plus proche. Et ça fonctionne plus ou moins ... Par exemple pour Hobbiton, voici les informations qu'il me sort 
+
+```
+"Hobbiton Movie Set, Lakeside, Matamata Piako District, Waikato, New Zealand / Aotearoa"
+```
+
+C'est pas mal mais il y a quand meme d 
 
 ## TODO
 
