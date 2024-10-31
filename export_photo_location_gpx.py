@@ -9,7 +9,8 @@ datapoint = {}
 
 in_path = sys.argv[1]
 
-with open(f"{in_path}/clusters_metadata.json", "r") as database:
+with open(f"{in_path}/test.json", "r") as database:
+#with open(f"{in_path}/clusters_metadata.json", "r") as database:
   datapoint = json.load(database)
 
 #sorted_metadata = sorted(datapoint, key=lambda x: float(x["datetime"]))

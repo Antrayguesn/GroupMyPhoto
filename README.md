@@ -1,4 +1,4 @@
-# Classification de mes photos
+# Groupement de mes photos
 
 > 41.2924°S / 174.7787° E
 
@@ -7,9 +7,10 @@ Voici ma serie d'algorithme afin de classer mes photos par lieux
 ## Contexte 
 
 L'idée de faire cet algorithme me vient de mon voyage en Nouvelle Zélande ou je prends des milliers de photos. Sauf que je n'ai pas le temps de les trier au fur et à mesure. 
-Donc je me retrouve à trier des gros blocs de photos et honnetement j'ai la flemme de le faire. 
+Donc je me retrouve à trier des gros blocs de photos et honnetement j'ai la flemme de le faire.
 
 Au cours des années j'ai vite compris qu'un ordinateur est un bon outil pour automatiser des taches et il est bon d'utiliser les bons outils pour son travail. Si on ne plante pas des clous avec la main il y a une raison.
+
 
 ## Comment grouper mes photos ?
 
@@ -170,8 +171,6 @@ Si je reprends ma classification de mes photos de voyage. Voici comment je l'aur
 
 On voit bien que j'ai toutes les informations pour le faire (mis à part le contient, mais ce n'est pas un problème pour le moment), il faut juste le remettre en forme et garder les bonnes informations.
 
-Honnetement, je ne vois pas comment un script pourrais faire ça. Peut être avec un peu d'intelligence artificielle entrainner sur le nom de mes dossiers déjà existant ? Pour l'instant, je veux gardr ma methode simple.
-
 Je vais le faire à la main mais en me basant sur les informations que je posséde.
 
 J'enregistre cette information dans mon fichier `json`
@@ -184,7 +183,7 @@ Bref, une belle machine à gaz.
 Finalement, en ecrivant le paragrahe ligne et si je me concentre sur mon besoin pour classer mon cluster, j'ai besoin d'avoir :
 * Le nom du contient
 * Le nom du pays
-* Le nom de la ville region
+* Le nom de la region (Par forcement la region géographique)
 * Le nom de l'endroit
 * Un champs de données libre pour une descrption ou une autre informations.
 
@@ -192,11 +191,121 @@ J'ai pratiquement toutes les infos dont j'ai besoin. Il me manque le nom du cont
 
 Je vais utiliser la bonne vielle méthode d'une entrée sur le termianl. Ca m'empèche d'avoir un traitement totalement automatisé. Mais j'ai conçut les algorithme pour être utilisé de manière indépedante. Donc cette partie là pourra être fait dans un seconds temps. Et puis si le nom sorti par `nominatim` n'est pas très bon, je peux aller consulter par moi même la photo.
 
+Finalement, après un très court test avec mon terminal, je me suis rendu compte que ce n'est vraiment pas pratique. Je n'ai pas d'autocomplétion et je dois répété plusieurs fois la même information. j'ai opté pour un formulaire en JS/HTML qui enregistre les données dans mon fichier `JSON`.
+J'épargne les details sur la conception de cette page, le developement web ce n'est pas vraimet ma spécialité (merci ChatGPT pour ton aide).
+
+Voici un aperçu : 
+
+![Formulaire de sasie en JS](assets/FormulaireJS.png)
+
+J'ai dit que ce n'était pas mon truc ! Au moment au j'écris, je ne suis pas encore sur que ce soit la version definitive.
+
+La page est accéssible dans [index.html](index.html)
+
+## Et aprés ?
+
+A partir de ce moment là, je galère à avancer, quelque chose de va pas dans ce que j'ai fait.
+Toutes les solutions que j'envisage pour continuer le groupement de mes photos ne me convient pas.
+
+Dans ma tête, tout ce qui existe, existe dans un ensemble cohérent. Si deux chose fonctionne l'un avec l'autre, elle le font de manière fluide.
+Et la ma solution actuelle ne me permet pas d'avoir une suite coherente. Rien de ce que j'imagine ne fit avec ce que j'ai fait. Ca ne me convient pas.
+
+J'arrive au bout de mon POC, mon projet manque de conception pour le moment.
+
+# Part 2 !
+
+## La révélation
+
+Je developpe ces scripts pendant que je voyage, je ne peux pas m'y consacrer à 100% mais c'est une bonne chose.
+Tout cela m'a rapellé que notre travail est un travail intellectuel.
+Ce genre de travaux requit une certaines inspirations. Pour ma part, je ne l'a trouve pas assis sur une chaise en regardant un écran. 
+
+C'est assez dur à expliqué mais mon esprit se nourri de ce que je vois, ce que je lis, des discussions avec des personnes. 
+
+Dans ce projet, j'occupe tout les postes ! De l'architecte à l'admin et cette manière de le mener me plait.
+
+Ca fait 2 semaines que je n'avais pas touché au projet. Mon esprit n'est pas consacré à 100% dessus.
+Alors que je suis en train d'admirer un des plus paysages que je n'ai jamais vu : Les malbourrought sounds. Tout ce débloque ! 
+
+Cela m'a refait penser à toute les heures de traval que je faisait enfermer dans un bureau a contempler un écran en esperant que la situation se débloque.
+J'ai trouvé tellement de solution juste en marchant dehors. Pour moi un developpeur c'est un peu comme un artiste. Nous produisont des oeuvres de l'esprit tout comme eux. 
+Un musicien peut être bloqué dans sa composition car il ne trouve pas le bon echainement de note. 
+Notre travail nécisite de l'inspiration !
+
+Bref our revenir à mon idée, il faut que je déduplique mes photos. La solution que j'ai trouvé est de rajouter dans les informations de mon cluster un dictionnaire avec comme clé le sha256 et en valeur le path de la photo.
+Et j'arrete de copier mes photos dans un autre répertore. Cette solution n'était clairement pas la bonne, je le savais mais cela me faisait gagner beaucoup de temps. Cela me permettais d'avoir un resultat asse rapide
+
+Maintenant que  
+
+## Un peu de rangement
+
+Mon code commence à grossir, j'en ai un peu partout. La première étape est de faire un peu de rangement. 
+L'arhitecture de mon projet est assez simple. Ce sont plusieurs script qui effectue des taches "simple". Chaque script fait une et une seule tâche.
+
+Je commence à identifier les objets de mon projet. Pas besoin d'avoir le nez dans le code pour ça. Je pense même que ce n'est pas une bonne chose.
+Généralement pour ça, j'aime bien expliqué mon projet à des non-informaticien. Au moment de l'expliquer 
+Et puis on n'a pas du tout la même vision. Pour moi, c'est logique, quand je vois mes programmes je vois des algorigrames, des conditions des instructions qu'un processeur va executé.
+Pour eux, c'est abstrait, c'est juste un truc qui fonctionne sur un ordinateur. Ils n'ont pas la barrière technique que j'ai.
+Mais bon la j'ai personne sous la main, ca me prends un peu plus de temps et bien afiner mes choix.
+
+Tout est en bazar, je n'ai presque fait aucuune Il y a surtout besoin de factorisé le code. 
+
+## Affiner les zones urbaines
+
+On repart avec une petite tache simple. Definir si une zone est urbaine ou non. 
+Simple ? On peut surement faire une machine à gaz et se basant sur des api qui contiennent le noms de toutes le villes du monde, estimait qu'une zone urbaine est une ville avec une population supérieur à un certains nombres de personnes. 
+
+Il y a peut être d'autres solutions, plus simple ou compliqué mais je vais juste me baser sur le nombre de photo dans un clusteur. J'estime que si un clusteur à plus de 150 photos alors on est dans une ville.
+Assez simple et rapide à mettre en place.
+
+```python
+import json
+import sys
+import copy
+
+from group.load_images import load_images_from_paths_list
+from group.clusterization import clusterize
+
+clusters = {}
+
+with sys.stdin as database:
+  clusters = json.load(database)
+
+
+def urbanize(clusters: dict):
+  clusters_copy = copy.deepcopy(clusters)
+  for cluster in clusters:
+    cluster_data = clusters[cluster]
+    cluster_len = len(cluster_data["photos"])
+    if cluster_len > 150:
+      paths_list = list(cluster_data["photos"].values())
+      data_images = load_images_from_paths_list(paths_list)
+      del clusters_copy[cluster]
+      # Clusterization par coordonnées GPS (Point les proches proche à 200m)
+      new_clusters = clusterize(data_images, 0.5)
+      for id, new_cluster in new_clusters.items():
+        if id != "ICanGroupThem":
+          clusters_copy[int(cluster) * 100 + int(id)] = new_cluster
+
+  return clusters_copy
+
+
+print(json.dumps(urbanize(clusters)))
+```
+
+Grace au refacto, 32 lignes de code. 
+
+Je ne voulais plus m'embeter avec des fichiers. Le script prend par defaut l'entrée standard et retourne le resultat sur la sortie standard.
+
+Le scirpt prend en entrée le fichier JSON qu'il faut reclusterizer et retourne le liste des clusters refactorizé.
+Pour le différencier, je prends l'id du cluster initial * 100 plus l'id du nouveau cluster. Cela me peremt de voir de quelle cluster, on part 
 
 
 
 ## TODO
 
-Chnager la sensibilité du DBScan dans les ville
+J'ai rajouté l'information de l'eps en km avec lequelle à été calculé les clusters 
+
+Chnager la sensibilité du DBScan dans les ville et noté l'information comme quoi c'est un cluster de ville
 
 Une fois que les noms des dossiers son modifié, il faut modifier les metadatas avec le nouveaux noms des dossiers
