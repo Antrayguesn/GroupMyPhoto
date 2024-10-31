@@ -29,12 +29,17 @@
   <title>Formulaire de classification de photos</title>
 </head>
 
-<body class="text-center">
+<body>
 
   <input type="file" id="file-input" accept=".json">
+
+  <div class="large-up-3 expanded row">
   <div id="form-container"></div>
+  </div>
+  <div>
 
   <button id="download-btn" class="button" style="display:none;">Télécharger les modifications</button>
+  </div>
 
   <script>
     let datapoints = {}; // Variable pour stocker les données JSON
@@ -42,8 +47,11 @@
     // Fonction pour générer un formulaire basé sur les données JSON
     function createForm(data, key) {
       return `
+    <div class="column border">
         <form id="form-${key}" onsubmit="saveChanges('${key}'); return false;">
           <h2>Cluster ${key}</h2>
+          
+          <h3> ${data.contient || ''}/${data.pays || ''}/${data.region || ''}/${data.place || ''} </h3>
           <p>${data.display_name}</p>
           <div class="row medium-up-2">
             <div class="columns">
@@ -67,11 +75,14 @@
             </div>
           </div>
           <div class="row medium-up-0">
+            <div class="column">
             <label for="extra-${key}"> Extra : </label> <br>
             <input type="text" id="extra-${key}" name="extra" value="${data.extra || ''}"><br>
             <input type="submit" id="submit-${key}" name="submit" value="Enregistrer" class="button"><br>
+            </div>
           </div>
         </form><br><br>
+        </div>
       `;
     }
 
