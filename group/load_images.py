@@ -1,15 +1,16 @@
 import os
-from imageData import ImageData
+from group.image_data import ImageData
 
-def load_images_from_dir(path):
+def load_images_from_dir(path, exclude_list: list = []):
   """Load images and extract their EXIF data using ImageData class"""
   data_images = {}
-  print(path)
   for root, _, files in os.walk(path):
     for file in files:
       file_path = os.path.join(root, file)
       try:
         image_data = ImageData(file_path)
+        if image_data.sha256 in exclude_list:
+          continue
       except Exception as e:
         continue
 

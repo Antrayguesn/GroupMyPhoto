@@ -5,10 +5,12 @@ import numpy as np
 import datetime
 import os
 import sys
+import copy
 import shutil
 import uuid
 import json
 import hashlib
+import uuid
 
 def _create_clusterize(data_images: dict, eps_km: float):
   coordinates_list = [i.coord for i in data_images.values() if i.coord]
@@ -33,6 +35,14 @@ def _create_clusterize(data_images: dict, eps_km: float):
   
   return clusters
 
+def compute_centroid(data_images: dict):
+  for cluster_id, cluster in copy.deepcopy(data_images).items():
+      cluster_coords = np.array([data["coord"] for _, data in cluster["photos"].items()])
+      centroid = cluster_coords.mean(axis=0)
+      data_images[cluster_id]["centroid"] = tuple(centroid)
+  return data_images
+
+
 def clusterize(data_images: dict, eps_km: float):
   clusters = _create_clusterize(data_images, eps_km)
   clusters_with_data = {}
@@ -45,7 +55,7 @@ def clusterize(data_images: dict, eps_km: float):
     centroid = cluster_coords.mean(axis=0)
     avg_datetime = cluster_datetime.mean(axis=0)
   
-    str_cluster_id = "ICanGroupThem" if cluster_id < 0 else int(cluster_id)
+    str_cluster_id = "ICanGroupThem" if cluster_id < 0 else str(uuid.uuid4())
   
     clusters_with_data[str_cluster_id] = {}
     clusters_with_data[str_cluster_id]["datetime"] = avg_datetime
@@ -57,5 +67,5 @@ def clusterize(data_images: dict, eps_km: float):
   
     for path in paths:
       # Dedup
-      clusters_with_data[str_cluster_id]["photos"][data_images[path].sha256] = path
+      clusters_with_data[str_cluster_id]["photos"][data_images[path].sha256] = data_images[path].toJSON()
   return clusters_with_data

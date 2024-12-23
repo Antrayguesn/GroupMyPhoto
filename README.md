@@ -11,6 +11,11 @@ Donc je me retrouve à trier des gros blocs de photos et honnetement j'ai la fle
 
 Au cours des années j'ai vite compris qu'un ordinateur est un bon outil pour automatiser des taches et il est bon d'utiliser les bons outils pour son travail. Si on ne plante pas des clous avec la main il y a une raison.
 
+Concrétement voici mes besoins :
+* 
+* Stocker mes photos
+* 
+
 
 ## Comment grouper mes photos ?
 
@@ -146,9 +151,12 @@ Pour mon cluster 0, ça donne ça :
 {"0": {"datetime": 1718253620.9124088, "centroid": [-37.85863017031631, 175.68077248580698]}}
 ```
 
-Il existe des API qui permette de faire une recherche sur une carte inversée. c'est à dire on rentre des coordonnées et ça nous sort une adresse ou un lieux.
+Il existe des API qui permette de faire une recherche sur une geolocalitation inversée. c'est à dire on rentre des coordonnées et ça nous sort une adresse ou un lieux.
 
-Je pense que l'API de Google Maps reponds parfaitement au besoin. Mais pour mon premier essai j'ai utilise une API d'openstreetmap (https://nominatim.openstreetmap.org/reverse).
+Je pense que l'API de Google Maps reponds parfaitement au besoin. Je l'ai déjà essayé pour un autre projet et c'est assez precis et assez rapide.
+Malheuresement, ça coute 5$ toutes les 1000 requetes ...
+
+Du coup j'ai choisi d'utiliser une API d'openstreetmap (https://nominatim.openstreetmap.org/reverse).
 
 Je lui donne en paramètre les coordonnées du centre d'un de mes clusters et il me sort l'adresse ou l'endroit le plus proche. Et ça fonctionne plus ou moins ... Par exemple pour Hobbiton, voici les informations qu'il me sort 
 
