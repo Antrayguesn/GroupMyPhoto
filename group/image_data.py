@@ -1,4 +1,5 @@
 from exif import Image
+from math import cos, asin, sqrt, pi
 import datetime
 import sys
 import uuid
@@ -10,6 +11,17 @@ def DMStoDD(degres, minutes, secondes, hemisphere):
   dd = degres + (minutes / 60) + (secondes / 3600)
   # L'hemisphere définit le signe de la coordonée
   return -dd if hemisphere == "S" or hemisphere == "W" else dd
+
+#https://en.wikipedia.org/wiki/Haversine_formula
+def distance(coord1, coord2):
+  r = 6371 # km
+  p = pi / 180
+  
+  lat1, lon1 = coord1
+  lat2, lon2 = coord2
+
+  a = 0.5 - cos((lat2-lat1)*p)/2 + cos(lat1*p) * cos(lat2*p) * (1-cos((lon2-lon1)*p))/2
+  return 2 * r * asin(sqrt(a))
 
 class ImageData:
   def __init__(self, file_path):
@@ -36,6 +48,10 @@ class ImageData:
       for bloc in iter(lambda: image_file.read(4096), b""):
         m.update(bloc)
       self.sha256 = m.hexdigest()
+  
+  def toJSON(self):
+    return {"path": self.path, "datetime": self.datetime.timestamp(), "coord": self.coord}
+
 
   def extract_gps_data(self, image):
     """Extract GPS coordinates from EXIF data and convert them to decimal degrees."""
