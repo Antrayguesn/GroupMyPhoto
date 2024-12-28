@@ -8,6 +8,8 @@ def _create_clusterize(data_images: dict, eps_km: float):
     coordinates_list = [i.coord for i in data_images.values() if i.coord]
     photo_paths = [i.path for i in data_images.values() if i.coord]
 
+    print(coordinates_list)
+
     if not coordinates_list:
         return {}
 
