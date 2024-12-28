@@ -1,10 +1,11 @@
 from utils.manage_json_file import read_json_file
 from utils.manage_json_file import write_json_file
+from utils.singleton import Singleton
 
 from error.cluster_file_json_error import CantFindClusterJson
 
 
-class Batch:
+class Batch(metaclass=Singleton):
     """
     Classe mère représentant une stratégie de traitement par lots.
     """

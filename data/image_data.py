@@ -2,6 +2,8 @@ from exif import Image
 import datetime
 import hashlib
 
+from utils.geo_function import DMStoDD
+
 
 class ImageData:
     def __init__(self, file_path):
@@ -35,8 +37,8 @@ class ImageData:
     def extract_gps_data(self, image):
         """Extract GPS coordinates from EXIF data and convert them to decimal degrees."""
         try:
-            lat = self.DMStoDD(*image.gps_latitude, image.gps_latitude_ref)
-            lon = self.DMStoDD(*image.gps_longitude, image.gps_longitude_ref)
+            lat = DMStoDD(*image.gps_latitude, image.gps_latitude_ref)
+            lon = DMStoDD(*image.gps_longitude, image.gps_longitude_ref)
             return lat, lon
         except AttributeError:
             return None
