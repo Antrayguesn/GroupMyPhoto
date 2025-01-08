@@ -1,2 +1,18 @@
-* Envoyer les modifis du cluster à l'api
 * Possibilité d'enlever une photo d'un cluster
+* Mettre les photos retirés dans un cluster a part
+* Possibilité de changer la photo de cluster
+
+* Une photo peut être dans plusieurs clusters
+* On peut retirer une photo d'un cluster 
+
+Mettre un formulaire pour editer le cluster de la photo
+  * On peut supprimer la photo du cluster
+  * On peut créer un nouveau cluster pour y mettre la photo
+  * Un cluster ne peut pas etre vide
+
+* Proposer la fusion des clusters si ils ont la même location  : Done
+
+
+Si une photo peut apartenir a deux clusters il faut revoir le modele de données
+
+il faut une liste de photo et une liste de cluster, avec un lien entre les deux (Redis ? Elasctic)
