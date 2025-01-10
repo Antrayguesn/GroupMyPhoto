@@ -12,6 +12,7 @@ class ImageData:
         self.coord = None
         self.cluster = None
         self.sha256 = None
+        self.exif = False
         self.load_exif_data()
 
     def load_exif_data(self):
@@ -19,6 +20,7 @@ class ImageData:
         with open(self.path, 'rb') as image_file:
             my_image = Image(image_file)
             if my_image.has_exif:
+                self.exif = True
                 self.datetime = datetime.datetime.strptime(my_image.datetime, "%Y:%m:%d %H:%M:%S")
                 self.coord = self.extract_gps_data(my_image)
 
@@ -32,7 +34,10 @@ class ImageData:
             self.sha256 = m.hexdigest()
 
     def toJSON(self):
-        return {"path": self.path, "datetime": self.datetime.timestamp(), "coord": self.coord}
+        if self.exif:
+            return {"path": self.path, "datetime": self.datetime.timestamp(), "coord": self.coord}
+        else:
+            return {"path": self.path}
 
     def extract_gps_data(self, image):
         """Extract GPS coordinates from EXIF data and convert them to decimal degrees."""

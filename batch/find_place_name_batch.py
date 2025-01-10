@@ -13,7 +13,7 @@ from batch.batch import Batch
 
 # DUCKDUCK_URL = "https://duckduckgo.com/?q={search}&kl={locale}&format=json&kp=-2&kc=1&kaf=1"
 DUCKDUCK_URL = "https://duckduckgo.com/?q={search}&format=json"
-NOMINATIM_API = "https://nominatim.openstreetmap.org/reverse?lat={lat}&lon={lon}&format=json"
+NOMINATIM_API = "https://nominatim.openstreetmap.org/reverse?lat={lat}&lon={lon}&format=json&extratags=1"
 
 
 class FindPlaceNameBatch(Batch):

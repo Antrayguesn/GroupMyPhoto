@@ -1,19 +1,14 @@
 from datetime import datetime
-import json
-import sys
 
 from xml.dom import minidom
 import xml.etree.ElementTree as ET
 
-datapoint = {}
+from utils.manage_json_file import read_json_file
 
-in_path = sys.argv[1]
-
-with open(f"{in_path}/test.json", "r") as database:
-    datapoint = json.load(database)
+datapoint = read_json_file()
 
 # sorted_metadata = sorted(datapoint, key=lambda x: float(x["datetime"]))
-sorted_metadata = sorted(datapoint.items(), key=lambda x: x[1]["datetime"])
+## sorted_metadata = sorted(datapoint.items(), key=lambda x: x[1]["datetime"])
 
 
 def export_as_track():
@@ -64,16 +59,23 @@ def export_as_points():
     trkName = ET.SubElement(trk, "name")
     trkName.text = "LazyGrouping"
 
-    for cluster_id, point in sorted_metadata:
+    for cluster_id, point in datapoint.items():
         point = datapoint[cluster_id]
 
-        trk_point = ET.SubElement(trk, "wpt")
-        trk_point.set('lon', "{}".format(point["centroid"][1]))
-        trk_point.set('lat', "{}".format(point["centroid"][0]))
+        trk_point = None
+        try:
+            trk_point = ET.SubElement(trk, "wpt")
+            trk_point.set('lon', "{}".format(point["centroid"][1]))
+            trk_point.set('lat', "{}".format(point["centroid"][0]))
+        except KeyError:
+            continue
 
         trk_time = ET.SubElement(trk_point, "time")
-        t = datetime.fromtimestamp(point["datetime"]).isoformat()
-        trk_time.text = str(t)
+        try:
+            t = datetime.fromtimestamp(point["datetime"]).isoformat()
+            trk_time.text = str(t)
+        except KeyError:
+            pass
 
         trk_name = ET.SubElement(trk_point, "name")
         try:
@@ -86,5 +88,5 @@ def export_as_points():
 
     return minidom.parseString(ET.tostring(gpx, encoding='utf-8', method='xml')).toprettyxml(indent="    ")
 
-
-print(export_as_points())
+with open("gpx.gpx", "w") as gpx:
+    gpx.write(export_as_points())

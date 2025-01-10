@@ -16,3 +16,7 @@ Mettre un formulaire pour editer le cluster de la photo
 Si une photo peut apartenir a deux clusters il faut revoir le modele de données
 
 il faut une liste de photo et une liste de cluster, avec un lien entre les deux (Redis ? Elasctic)
+
+
+
+Mettre des tags pour chaque photos

@@ -6,6 +6,9 @@ from batch.find_place_name_batch import FindPlaceNameBatch
 from batch.compute_farest_distance_batch import ComputeFarestDistance
 from batch.build_location_prop_batch import BuildLocationPropBatch
 from batch.merge_cluster_same_location import MergeClusterSameLocation
+from batch.import_from_dir_batch import ImportFromDirBatch
+from batch.search_cluster_coord_batch import SearchClusterCoord
+from batch.export_photo_location_gpx import export_as_points
 
 from utils.merge_cluster_service import merge_clusters, move_photo_from_cluster_to_cluster, create_cluster
 from utils.get_map_service import get_map, get_cluster_by_location
@@ -81,6 +84,12 @@ def serve_photos(filename):
     return send_from_directory('photos', filename)
 
 
+@app.route('/sorted/<path:filename>')
+def serve_sorted(filename):
+    # Using request args for path will expose you to directory traversal attacks
+    return send_from_directory('sorted', filename)
+
+
 @app.route('/merge_clusters/<uuid:id_cluster_1>/<uuid:id_cluster_2>', methods=["POST"])
 def merge_clusters_api(id_cluster_1, id_cluster_2):
     merge_clusters(id_cluster_1, id_cluster_2)
@@ -113,6 +122,10 @@ def get_cluster_by_location_api(location_b64):
 def get_map_api():
     map = get_map()
     return map
+
+
+SearchClusterCoord().run()
+export_as_points()
 
 
 app.run()

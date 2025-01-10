@@ -6,14 +6,14 @@ def get_map():
     path_map = {}
 
     for cluster_id, cluster in clusters.items():
-        print(cluster)
-        levels = cluster["location"].split("/")
-        current_level = path_map
+        if "location" in cluster:
+            levels = cluster["location"].split("/")
+            current_level = path_map
 
-        for level in levels:
-            if level not in current_level:
-                current_level[level] = {}
-            current_level = current_level[level]
+            for level in levels:
+                if level not in current_level:
+                    current_level[level] = {}
+                current_level = current_level[level]
 
     return path_map
 
