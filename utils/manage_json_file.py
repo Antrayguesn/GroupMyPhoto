@@ -12,6 +12,8 @@ def read_json_file() -> dict:
         raise CantFindClusterJson()
     except Exception:
         raise CantReadClusterJson()
+    except json.decoder.JSONDecodeError:
+        print(clusters_json_file.read()) 
     return clusters
 
 

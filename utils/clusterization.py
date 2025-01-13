@@ -35,7 +35,10 @@ def _create_clusterize(data_images: dict, eps_km: float):
 
 def compute_centroid(data_images: dict):
     for cluster_id, cluster in copy.deepcopy(data_images).items():
-        if "photos" in cluster:
+        if "photos" in cluster \
+           and "coord" in cluster["photos"] \
+           and ("centroid" not in cluster or cluster["centroid"] is None) \
+           and ("imported" not in cluster or not cluster["imported"]):
             cluster_coords = np.array([data["coord"] for _, data in cluster["photos"].items()])
             centroid = cluster_coords.mean(axis=0)
             data_images[cluster_id]["centroid"] = tuple(centroid)
