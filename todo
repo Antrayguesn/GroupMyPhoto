@@ -20,3 +20,6 @@ il faut une liste de photo et une liste de cluster, avec un lien entre les deux 
 
 
 Mettre des tags pour chaque photos
+
+
+Ecrire un BatchManager qui permet d'executer une sequence de batch
