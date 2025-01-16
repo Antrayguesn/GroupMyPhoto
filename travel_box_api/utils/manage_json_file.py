@@ -1,7 +1,7 @@
 import json
 
-from error.cluster_file_json_error import CantFindClusterJson
-from error.cluster_file_json_error import CantReadClusterJson
+from travel_box_api.error.cluster_file_json_error import CantFindClusterJson
+from travel_box_api.error.cluster_file_json_error import CantReadClusterJson
 
 
 def read_json_file() -> dict:

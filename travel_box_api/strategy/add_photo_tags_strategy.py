@@ -1,5 +1,5 @@
 
-from strategy.strategy import Strategy
+from travel_box_api.strategy.strategy import Strategy
 
 
 class AddPhotoTagsStrategy(Strategy):
@@ -13,9 +13,8 @@ class AddPhotoTagsStrategy(Strategy):
                 if photo_id == photo_id_:
                     return cluster_id
 
-
     def __add_photo_tag(self, photo_id, data):
-        cluster = self.__search_photo_in_clusters(photo_id)
+        cluster_id = self.__search_photo_in_clusters(photo_id)
         try:
             self.clusters[cluster_id]["photos"][photo_id]["tags"].update(data)
         except KeyError:

@@ -1,4 +1,4 @@
-from utils.manage_json_file import read_json_file
+from travel_box_api.utils.manage_json_file import read_json_file
 
 
 def get_map():
@@ -10,10 +10,17 @@ def get_map():
             levels = cluster["location"].split("/")
             current_level = path_map
 
-            for level in levels:
+            for index, level in enumerate(levels):
                 if level not in current_level:
-                    current_level[level] = {}
-                current_level = current_level[level]
+                    # Initialiser chaque niveau comme un dict avec des enfants
+                    current_level[level] = {"children": {}, "is_leaf": False}
+
+                # Si on est au dernier niveau, marquer comme feuille
+                if index == len(levels) - 1:
+                    current_level[level]["is_leaf"] = True
+
+                # Descendre dans la hiérarchie
+                current_level = current_level[level]["children"]
 
     return path_map
 

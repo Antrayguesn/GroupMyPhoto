@@ -1,5 +1,5 @@
 #!/bin/python3
-from strategy.strategy import Strategy
+from travel_box_api.strategy.strategy import Strategy
 
 
 class GetClustersStatStrategy(Strategy):

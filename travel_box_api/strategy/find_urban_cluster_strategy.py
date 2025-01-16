@@ -7,9 +7,9 @@ Split big photo cluster
 import copy
 import uuid
 
-from utils.load_images import load_images_from_paths_list
-from utils.clusterization import clusterize
-from strategy.strategy import Strategy
+from travel_box_api.utils.load_images import load_images_from_paths_list
+from travel_box_api.utils.clusterization import clusterize
+from travel_box_api.strategy.strategy import Strategy
 
 
 class FindUrbanClusterStrategy(Strategy):

@@ -6,10 +6,10 @@ Split big photo cluster
 
 import copy
 
-from strategy.strategy import Strategy
-from utils.geo_function import distance
+from travel_box_api.strategy.strategy import Strategy
+from travel_box_api.utils.geo_function import distance
 
-from data.log import DEBUG_UNABLE_TO_FIND_CENTROID, DEBUG_NO_CENTROID
+from travel_box_api.data.log import DEBUG_UNABLE_TO_FIND_CENTROID, DEBUG_NO_CENTROID
 
 
 class ComputeFarestDistanceStrategy(Strategy):

@@ -3,9 +3,9 @@ import base64
 
 import xml.etree.ElementTree as ET
 
-from strategy.strategy import Strategy
+from travel_box_api.strategy.strategy import Strategy
 
-from data.log import DEBUG_NO_KEY_COORD
+from travel_box_api.data.log import DEBUG_NO_KEY_COORD
 
 
 class ExportPhotosGPXStrategy(Strategy):

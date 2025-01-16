@@ -1,7 +1,7 @@
 import copy
 import uuid
 
-from utils.manage_json_file import read_json_file, write_json_file
+from travel_box_api.utils.manage_json_file import read_json_file, write_json_file
 
 
 def merge_clusters(id_cluster_1, id_cluster_2):

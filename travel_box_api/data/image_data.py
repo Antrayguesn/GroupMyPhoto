@@ -2,7 +2,7 @@ from exif import Image
 import datetime
 import hashlib
 
-from utils.geo_function import DMStoDD
+from travel_box_api.utils.geo_function import DMStoDD
 
 
 class ImageData:

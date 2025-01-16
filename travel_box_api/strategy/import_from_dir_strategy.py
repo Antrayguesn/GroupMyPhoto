@@ -7,9 +7,9 @@ Date time cluster
 import os
 import uuid
 
-from utils.load_images import load_images_from_paths_list
+from travel_box_api.utils.load_images import load_images_from_paths_list
 
-from strategy.strategy import Strategy
+from travel_box_api.strategy.strategy import Strategy
 
 IMPORT_DIR_PATH = "sorted/"
 

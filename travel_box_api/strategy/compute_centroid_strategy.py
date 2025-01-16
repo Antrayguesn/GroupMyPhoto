@@ -4,8 +4,8 @@
 Date time cluster
 """
 
-from utils.clusterization import compute_centroid
-from strategy.strategy import Strategy
+from travel_box_api.utils.clusterization import compute_centroid
+from travel_box_api.strategy.strategy import Strategy
 
 
 class ComputeCentroidStrategy(Strategy):

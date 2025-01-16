@@ -7,7 +7,7 @@ Date time cluster
 import time
 import requests
 
-from strategy.strategy import Strategy
+from travel_box_api.strategy.strategy import Strategy
 
 IMPORT_DIR_PATH = "sorted/"
 
@@ -25,7 +25,7 @@ class SearchClusterCoordStrategy(Strategy):
         for c_id, c in self.clusters.items():
             if "centroid" not in c or c["centroid"] is None:
                 try:
-                    req = requests.get(API_URL_NOMINATIM.format(place=c["place"], country=c.get("country","")), headers={"User-agent": "classify - v0.1", "Accept-Language": "fr-FR, en;q=0.8"})
+                    req = requests.get(API_URL_NOMINATIM.format(place=c["place"], country=c.get("country", "")), headers={"User-agent": "classify - v0.1", "Accept-Language": "fr-FR, en;q=0.8"})
                 except KeyError as e:
                     self.log("WARNING_0010", f"Impossible de trouver la clé {e}")
 

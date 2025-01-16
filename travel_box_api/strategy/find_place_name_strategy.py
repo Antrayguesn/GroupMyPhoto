@@ -8,10 +8,10 @@ import time
 import copy
 import re
 
-from utils.country_code import COUNTRY_CODE
-from strategy.strategy import Strategy
+from travel_box_api.utils.country_code import COUNTRY_CODE
+from travel_box_api.strategy.strategy import Strategy
 
-from data.log import DEBUG_FIND_CLUSTER_PLACE
+from travel_box_api.data.log import DEBUG_FIND_CLUSTER_PLACE
 
 # DUCKDUCK_URL = "https://duckduckgo.com/?q={search}&kl={locale}&format=json&kp=-2&kc=1&kaf=1"
 DUCKDUCK_URL = "https://duckduckgo.com/?q={search}&format=json"

@@ -1,11 +1,11 @@
 import copy
 
-from utils.clusterization import clusterize
-from utils.load_images import load_images_from_dir
-from utils.geo_function import distance
-from strategy.strategy import Strategy
+from travel_box_api.utils.clusterization import clusterize
+from travel_box_api.utils.load_images import load_images_from_dir
+from travel_box_api.utils.geo_function import distance
+from travel_box_api.strategy.strategy import Strategy
 
-from data.log import DEBUG_PHOTO_ALREADY_DELETED, ERROR_NO_PHOTO_PATH, DEBUG_ADD_PHOTO_IN_CLUSTER, WARNING_NO_CENTROID
+from travel_box_api.data.log import DEBUG_PHOTO_ALREADY_DELETED, ERROR_NO_PHOTO_PATH, DEBUG_ADD_PHOTO_IN_CLUSTER, WARNING_NO_CENTROID
 
 ESP_KM = 4
 

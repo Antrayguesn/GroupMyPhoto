@@ -3,7 +3,7 @@ Date time cluster
 """
 import copy
 
-from strategy.strategy import Strategy
+from travel_box_api.strategy.strategy import Strategy
 
 
 class BuildLocationPropStrategy(Strategy):

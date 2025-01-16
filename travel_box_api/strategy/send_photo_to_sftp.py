@@ -10,7 +10,7 @@ import copy
 import paramiko
 import re
 
-from group.country_code import UNUSE_WORDS
+from travel_box_api.group.country_code import UNUSE_WORDS
 
 clusters = {}
 
