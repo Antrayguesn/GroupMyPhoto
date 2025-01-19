@@ -76,6 +76,7 @@ Request data should be provided in JSON format.
 
 This example demonstrates how to execute the FindUrbanClusterStrategy followed by the ComputeCentroidStrategy on the /batch/find_urban_clusters route:
 
+```json
 {
   "/batch/find_urban_clusters": {
       "STRATEGIES": [
@@ -84,6 +85,7 @@ This example demonstrates how to execute the FindUrbanClusterStrategy followed b
       ]
   }
 }
+```
 
 ### Example 2: Strategy with arguments
 
