@@ -7,7 +7,12 @@ from travel_box_api.strategy.strategy import Strategy
 
 from travel_box_api.data.log import DEBUG_PHOTO_ALREADY_DELETED, ERROR_NO_PHOTO_PATH, DEBUG_ADD_PHOTO_IN_CLUSTER, WARNING_NO_CENTROID
 
+import os
+
 ESP_KM = 4
+
+DEFAULT_PHOTOS_DIR_PATH = "photos"
+UNSORTED_PHOTOS_PATH_VAR = "TB_UNSORTED_PHOTOS_PATH"
 
 
 class GroupPhotosByLocationStrategy(Strategy):
@@ -62,7 +67,8 @@ class GroupPhotosByLocationStrategy(Strategy):
         return clusterize(data_images, ESP_KM)
 
     def process(self):
+        path_photos_dir = os.environ.get(UNSORTED_PHOTOS_PATH_VAR, DEFAULT_PHOTOS_DIR_PATH)
         if self.clusters is None:
-            self.clusters = self._create_clusters_from_path("photos")
+            self.clusters = self._create_clusters_from_path(path_photos_dir)
         else:
-            self.clusters = self._update_clusters_with_coord("photos")
+            self.clusters = self._update_clusters_with_coord(path_photos_dir)

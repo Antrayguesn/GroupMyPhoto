@@ -9,10 +9,6 @@ import requests
 
 from travel_box_api.strategy.strategy import Strategy
 
-IMPORT_DIR_PATH = "sorted/"
-
-
-# API_URL_NOMINATIM = "https://nominatim.openstreetmap.org/search.php?city={place}&country={country}&format=jsonv2&namedetails=1&extratags=1"
 API_URL_NOMINATIM = "https://nominatim.openstreetmap.org/search.php?city={place}&country={country}&format=jsonv2"
 
 

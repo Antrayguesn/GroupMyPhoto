@@ -23,6 +23,11 @@ SEQUENCES = {
                 "ComputeCentroidStrategy"
             ]
         },
+        "/batch/import_from_dir": {
+            "STRATEGIES": [
+                "ImportFromDirStrategy",
+            ]
+        },
         "/batch/find_place_name": {
             "STRATEGIES": [
                 "FindPlaceStrategy"

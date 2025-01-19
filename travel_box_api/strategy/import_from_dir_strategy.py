@@ -1,9 +1,4 @@
 #!/bin/python3
-
-"""
-Date time cluster
-"""
-
 import os
 import uuid
 
@@ -11,18 +6,26 @@ from travel_box_api.utils.load_images import load_images_from_paths_list
 
 from travel_box_api.strategy.strategy import Strategy
 
+from travel_box_api.data.log import DEBUG_PARSING_DIR
+
 IMPORT_DIR_PATH = "sorted/"
+
+DEFAULT_IMPORT_DIR_PATH = "sorted/"
+IMPORTED_DIR_PATH_VAR = "TB_IMPORTED_DIR_PATH"
 
 
 class ImportFromDirStrategy(Strategy):
     def __init__(self):
         super().__init__()
-        self.STRATEGY_CODE = "000"
+        self.STRATEGY_CODE = "020"
 
     def _import_from_dir(self):
         all_location = [c["location"] for c_id, c in self.clusters.items()]
 
-        for root, dirs, files in os.walk(IMPORT_DIR_PATH, followlinks=True):
+        imported_dir_path = os.environ.get(IMPORTED_DIR_PATH_VAR, DEFAULT_IMPORT_DIR_PATH)
+        self.log(DEBUG_PARSING_DIR, f"Imported dir path : {imported_dir_path}", path=imported_dir_path)
+
+        for root, dirs, files in os.walk(imported_dir_path, followlinks=True):
             if files:
                 location = root[len(IMPORT_DIR_PATH):]
                 if location not in all_location:

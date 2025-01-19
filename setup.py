@@ -12,15 +12,11 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     install_requires=[
-        "requests>=2.25.1",
         "flask",
         "numpy",
+        "requests",
+        "exif",
+        "scikit-learn"
     ],
-    entry_points={
-        "console_scripts": [
-            "project_name=project_name.main:main",  # Point d'entrée CLI
-        ],
-    },
     python_requires=">=3.6",
 )
-

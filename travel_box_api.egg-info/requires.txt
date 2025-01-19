@@ -1,3 +1,5 @@
-requests>=2.25.1
 flask
 numpy
+requests
+exif
+scikit-learn

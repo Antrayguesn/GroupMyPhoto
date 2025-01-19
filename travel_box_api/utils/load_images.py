@@ -1,19 +1,21 @@
 import os
 from travel_box_api.data.image_data import ImageData
-from travel_box_api.data.log import log, INFO_LOADING_PHOTO, WARNING_UNEXECPT_ERROR
+from travel_box_api.data.log import log, INFO_LOADING_PHOTO, WARNING_UNEXECPT_ERROR, DEBUG_PHOTO_CURRENTLY_PROCESS
 
 
 def load_images_from_dir(path, exclude_list: list = []):
     """Load images and extract their EXIF data using ImageData class"""
-    log(INFO_LOADING_PHOTO, f"Loading photo data from path : {path}")
+    log(INFO_LOADING_PHOTO, f"Loading photo data from path : {path}", path=path)
     data_images = {}
     for root, _, files in os.walk(path):
-        for file in files:
-            if file[-4:].lower() == ".mp4":
+        for file_photo in files:
+            file_path = os.path.join(root, file_photo)
+            log(DEBUG_PHOTO_CURRENTLY_PROCESS, f"Trying to load {file_path}", photo_path=file_path)
+            if not file_photo.lower().endswith(('.jpg', '.jpeg', '.png')):
                 continue
-            file_path = os.path.join(root, file)
             try:
                 image_data = ImageData(file_path)
+                log(DEBUG_PHOTO_CURRENTLY_PROCESS, f"Photo loaded {image_data.sha256}", hash=image_data.sha256)
                 if image_data.sha256 in exclude_list:
                     continue
             except Exception as e:
