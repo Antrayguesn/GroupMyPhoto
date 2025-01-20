@@ -1,4 +1,3 @@
-
 from flask import Flask, jsonify, send_from_directory, request
 
 import numpy as np
@@ -13,7 +12,7 @@ app = Flask(__name__)
 
 strategy_manager = StrategyManager()
 
-# Dynamic 
+# Dynamic
 for method, routes in SEQUENCES.items():
     for route, config in routes.items():
         strategies = config.get("STRATEGIES", [])
