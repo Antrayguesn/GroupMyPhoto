@@ -4,7 +4,7 @@ The TravelBox API classifies your photos based on their GPS coordinates extracte
 
 TravelBox can automatically organize all your photos based on their geographical location
 
-And also do the reverse: start from an already organized folder and retrieve the GPS coordinates of each photo or group.
+And also do the reverse: start from an already organized folder and retrieve the GPS coordinates of each group.
 
 Display everything in a simple and user-friendly interface: either as an interactive map or as a list. (TravelBoxUI)
 
