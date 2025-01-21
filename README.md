@@ -50,7 +50,7 @@ docker run -ti -e TB_IMPORTED_DIR_PATH="/sorted" \
 -v Images/Photos/Voyage:/sorted:ro \
 -v $(pwd)/data.json:/data.json \
 --network host \
-travel_box_ap
+travel_box_api:latest
 ```
 
 The container is exposed on port `5000`.
