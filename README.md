@@ -61,6 +61,14 @@ You can test the cluster mapping endpoint with:
 curl http://localhost:5000/map_cluster
 ```
 
+## Group your photos by location
+
+To initialise your group of photos
+
+```bash
+curl http://localhost:5000/group_photo_by_location
+```
+
 ## Dynamic Routing
 
 The dynamic router reads from the file `conf/strategy_sequence.py`. Each key in the `SEQUENCES` dictionary defines a route (URL).
