@@ -2,7 +2,7 @@
 
 The TravelBox API classifies your photos based on their GPS coordinates extracted from Exif data.
 
-TravelBox can Automatically organize all your photos based on their geographical location
+TravelBox can automatically organize all your photos based on their geographical location
 
 And also do the reverse: start from an already organized folder and retrieve the GPS coordinates of each photo or group.
 
@@ -32,7 +32,7 @@ The package will be generated in the dist directory.
 
 After building the Python package, you can create the Docker image.
 
-The application runs in the container using gunicorn.
+The application runs in the container using `gunicorn`.
 
 To build the Docker image:
 
