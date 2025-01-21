@@ -74,7 +74,7 @@ Request data should be provided in JSON format.
 
 ### Example 1: Multiple strategies on a route
 
-This example demonstrates how to execute the FindUrbanClusterStrategy followed by the ComputeCentroidStrategy on the /batch/find_urban_clusters route:
+This example demonstrates how to execute the `FindUrbanClusterStrategy` followed by the `ComputeCentroidStrategy` on the `/batch/find_urban_clusters` route:
 
 ```json
 {
